@@ -19,17 +19,24 @@ from urllib.parse import urlparse
 def encrypt(ref_id):
     pwd_str = f"{PASSWORD}:{ref_id}"
     key = os.urandom(32)
-    # AES encrypt
+    # AES encrypt - using AES-256-ECB (matches AES/ECB/PKCS5Padding in Java)
     p = subprocess.run(['openssl','enc','-aes-256-ecb','-K',key.hex(),'-nosalt'], 
                        input=pwd_str.encode(), capture_output=True, check=True)
     enc_pwd = base64.b64encode(p.stdout).decode()
-    # RSA encrypt
+    # RSA encrypt - Convert X509 DER to PEM format first, then encrypt with PKCS1 padding
     with tempfile.NamedTemporaryFile(mode='wb', delete=False, suffix='.der') as f:
         f.write(base64.b64decode(PUBLIC_KEY))
-        kf = f.name
-    p = subprocess.run(['openssl','rsautl','-encrypt','-pubin','-inkey',kf,'-keyform','DER','-pkcs'],
+        der_file = f.name
+    # Convert DER to PEM format
+    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.pem') as f:
+        pem_file = f.name
+    subprocess.run(['openssl','rsa','-pubin','-inform','DER','-in',der_file,'-outform','PEM','-out',pem_file], 
+                   check=True, capture_output=True)
+    # Encrypt with RSA using PKCS1 padding (matches RSA/ECB/PKCS1Padding in Java)
+    p = subprocess.run(['openssl','pkeyutl','-encrypt','-pubin','-inkey',pem_file,'-pkeyopt','rsa_padding_mode:pkcs1'],
                        input=key, capture_output=True, check=True)
-    os.unlink(kf)
+    os.unlink(der_file)
+    os.unlink(pem_file)
     return enc_pwd, base64.b64encode(p.stdout).decode()
 
 def call_api():
