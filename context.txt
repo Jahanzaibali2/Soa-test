@@ -1,0 +1,54 @@
+{
+  "serviceHeader": {
+    "channel": "CHATBOT",
+    "processingType": "SYNCHRONOUS",
+    "authInfo": {
+      "username": "foree",
+      "password": "PvcUXbCEPyXfY9HkyKjli880AdgYKVUtytcSot1urM=",
+      "authenticationType": "password",
+      "authKey": "L664HuJegNhbRAcKyblwld9rrMu+fAZjfh8/7STfm4nE3yisAVTw/oYSU2IjWHeSRHniHztWcjyHdVxnle4hk6S0qw1mOx2toQfcsDAtL1btmzhfNY5YrhKNtMHkbJiV/KvOBxcvuL0BFQDVX2spmtl6WuBbYRqc4OvVBHZPCw="
+    },
+    "parameters": {},
+    "fromRegionInfo": {},
+    "toRegionInfo": {}
+  },
+  "transactionInfo": {
+    "transactionDate": "2020-10-28",
+    "transactionTime": "09:20:01",
+    "transactionType": "BALANCE_INQUIRY",
+    "referenceId": "XZQG99444844",
+    "stan": "812018",
+    "transmissionDateTime": "2020-10-28T09:20:01",
+    "attributeList": [
+      { "attributeKey": "appCode", "attributeValue": "BALINQ" },
+      { "attributeKey": "workstation", "attributeValue": "tdl-mobile-app" },
+      { "attributeKey": "screenNo", "attributeValue": "DA" },
+      { "attributeKey": "sourceUserId", "attributeValue": "FOREE852741" }
+    ]
+  },
+  "balanceInquiryRequest": {
+    "accountDetail": {
+      "accountIdentifier": {
+        "accountNumber": "187201007756"
+      },
+      "accountType": "20",
+      "accountCurrency": "586",
+      "branchInfo": {
+        "bankInfo": {
+          "name": "United Bank Limited",
+          "bankIMD": "588974"
+        },
+        "branchCode": "0605",
+        "branchName": "UBL CBS",
+        "telephoneNumber": "0",
+        "branchAddress": {
+          "country": "Pakistan",
+          "state": "Sindh",
+          "city": "Karachi",
+          "zipCode": "74800",
+          "addressLine": "Shaheed-e-millat Road"
+        }
+      }
+    }
+  }
+}
