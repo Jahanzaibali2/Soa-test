@@ -19,7 +19,7 @@ BRANCH_CODE = '0605'
 BRANCH_NAME = 'UBL CBS'
 # ======================================================
 
-import base64, os, subprocess, tempfile, time, random, json, ssl, http.client, http.server
+import base64, os, subprocess, tempfile, time, random, json, ssl, uuid, http.client, http.server
 from datetime import datetime
 
 def encrypt(ref_id):
@@ -42,7 +42,7 @@ def encrypt(ref_id):
     return enc_pwd, base64.b64encode(p.stdout).decode()
 
 def call_api():
-    ref = f"{int(time.time()*1000)}{random.randint(100000,999999)}"
+    ref = str(uuid.uuid4())
     pwd, auth = encrypt(ref)
     payload = {
         'serviceHeader': {
