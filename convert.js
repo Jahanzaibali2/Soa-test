@@ -47,7 +47,7 @@ function encryptPasswordWithPublicKey(referenceId, rawPassword, publicKeyBase64 
 }
 
 // Run with same inputs as Java (referenceId, rawPassword)
-const referenceId = "AINEXT";
+const referenceId = crypto.randomUUID();
 const rawPassword = "ainext123";
 
 console.log("*****Start****************");
